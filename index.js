@@ -8,6 +8,7 @@ import authRoute from "./routes/auth.js";
 import postRoute from "./routes/posts.js";
 import commentRoute from "./routes/comments.js";
 import catsRoute from "./routes/categories.js";
+import { clothesController } from "./controllers/clothes.controller.js";
 
 const app = express();
 dotenv.config();
@@ -26,9 +27,11 @@ app.use(express.static("uploads"));
 
 // Routes
 app.use("/api/auth", authRoute);
+app.use(require("./routes/category.route"));
 app.use("/api/posts", postRoute);
 app.use("/api/comments", commentRoute);
 app.use("/api/cats", catsRoute);
+app.use(require("./routes/clothes.route"));
 
 async function start() {
   try {
