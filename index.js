@@ -27,6 +27,7 @@ app.use(express.static("uploads"));
 // Routes
 app.use("/api/auth", authRoute);
 app.use(require("./routes/category.route"));
+app.use(require("./routes/clothes.route"));
 app.use("/api/posts", postRoute);
 app.use("/api/comments", commentRoute);
 app.use("/api/cats", catsRoute);
@@ -34,7 +35,7 @@ app.use("/api/cats", catsRoute);
 async function start() {
   try {
     await mongoose.connect(
-      `mongodb+srv://${NAME}:${PASSWORD}@cluster0.w5uga6x.mongodb.net/news911`
+      `mongodb+srv://${NAME}:${PASSWORD}@cluster0.w5uga6x.mongodb.net/news911`,
     );
 
     app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
