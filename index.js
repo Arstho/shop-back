@@ -7,7 +7,7 @@ import fileUpload from 'express-fileupload'
 import authRoute from './routes/auth.js'
 import postRoute from './routes/posts.js'
 import commentRoute from './routes/comments.js'
-import catsRoute from './routes/categories.js'
+import catsRoute from './routes/categories.js'  
 
 const app = express()
 dotenv.config()
