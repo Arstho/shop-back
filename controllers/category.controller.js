@@ -29,9 +29,13 @@ module.exports.CategoryController = {
   },
   updateCategoryById: async (req, res) => {
     try {
-      const updatedCategory = await Category.findByIdAndUpdate(req.params.id, {
-        category: req.body.category,
-      });
+      const updatedCategory = await Category.findByIdAndUpdate(
+        req.params.id,
+        {
+          category: req.body.category,
+        },
+        { new: true },
+      );
       return res.json(updatedCategory);
     } catch (err) {
       return res.json(err);
