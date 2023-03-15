@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const cors = require("cors");
 const morgan = require("morgan");
+const authRoute = require("./routes/auth.route");
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.use(express.static("uploads"));
 app.use(require("./routes/category.route"));
 app.use(require("./routes/clothes.route"));
 app.use(require("./routes/cart.route"));
+app.use("/auth", authRoute);
+app.use("/uploads", express.static(__dirname + "/uploads"));
 
 async function start() {
   try {
