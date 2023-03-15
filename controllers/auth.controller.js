@@ -1,13 +1,12 @@
 const Auth = require("../models/Auth.model");
-const Role = require("../models/Role.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { secret } = require("../config");
 
-const generateAccesToken = (id, roles) => {
+const generateAccesToken = (id, role) => {
   const payload = {
     id,
-    roles,
+    role,
   };
   return jwt.sign(payload, secret, { expiresIn: "7d" });
 };
@@ -51,7 +50,7 @@ class authController {
       if (!validPassword) {
         return res.status(400).json({ message: "Введен неверный пароль" });
       }
-      const token = generateAccesToken(user._id, user.roles);
+      const token = generateAccesToken(user._id, user.role);
       return res.json({ token });
     } catch (error) {
       return res.status(400).json({ message: "Login error" });
