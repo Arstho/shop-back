@@ -3,7 +3,10 @@ const mongoose = require("mongoose");
 const authSchema = mongoose.Schema({
   username: { type: String, unique: true, required: true },
   password: { type: String, required: true },
-  roles: [{ type: String, ref: "Role" }],
+  role: {
+    type: String,
+    default: "USER",
+  },
 });
 
 const Auth = mongoose.model("Auth", authSchema);
