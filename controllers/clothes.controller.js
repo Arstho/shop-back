@@ -7,8 +7,7 @@ module.exports.clothesController = {
         name: req.body.name,
         image: req.body.image,
         category: req.body.category,
-        brand: req.body.brand,
-        size: req.body.size,
+        sizes: req.body.sizes, 
         price: req.body.price,
         color: req.body.color,
       });

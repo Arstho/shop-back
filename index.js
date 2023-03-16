@@ -9,7 +9,9 @@ const app = express();
 
 // Constants
 
-const { PORT, MONGO_SERVER } = process.env;
+const PORT = process.env.PORT || 3001
+const NAME = process.env.NAME
+const PASSWORD = process.env.PASSWORD
 
 // Middleware
 app.use(cors());
@@ -26,12 +28,13 @@ app.use("/uploads", express.static(__dirname + "/uploads"));
 
 async function start() {
   try {
-    await mongoose.connect(MONGO_SERVER);
-    app.listen(PORT, () => {
-      console.log(`Server started: http://localhost:${PORT}/`);
-    });
-  } catch (err) {
-    console.log(`Error: ${err}`);
+    await mongoose.connect(
+      `mongodb+srv://${NAME}:${PASSWORD}@cluster0.w5uga6x.mongodb.net/news911`,
+    )
+
+    app.listen(PORT, () => console.log(`Server started on port: ${PORT}`))
+  } catch (error) {
+    console.log(error)
   }
 }
 

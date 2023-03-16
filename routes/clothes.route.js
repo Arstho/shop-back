@@ -3,10 +3,10 @@ const { clothesController } = require("../controllers/clothes.controller");
 
 const router = Router();
 
-router.post("/", clothesController.addClothes);
+router.post("/clothes", clothesController.addClothes);
 router.delete("/:id", clothesController.deleteClothes);
 router.patch("/:id", clothesController.editClothes);
-router.get("/", clothesController.getClothes);
-router.get("/:id", clothesController.getClothesById);
+router.get("/clothes", clothesController.getClothes);  
+router.get("/:id", clothesController.getClothesById);  
 
-module.exports = router;
+module.exports = router; 

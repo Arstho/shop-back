@@ -7,13 +7,9 @@ const clothesSchema = mongoose.Schema({
     type: mongoose.SchemaTypes.ObjectId,
     ref: "Category",
   },
-  brand: {
-    type: mongoose.SchemaTypes.ObjectId,
-    ref: "Brand",
-  },
-  size: String,
+  sizes: [],
   price: Number,
-  color: String,
+  color: [],
 });
 
 const Clothes = mongoose.model("Clothes", clothesSchema);
