@@ -63,6 +63,15 @@ class authController {
       res.json({ users });
     } catch (error) {}
   }
+  async deleteUser(req, res) {
+    try {
+      const username = req.params;
+      const user = await Auth.findOneAndDelete({"username": username.user})
+      res.json(user)
+    } catch (error) {
+      res.json({ message: 'Не удалось удалить' })
+    }
+  }
 }
 
 module.exports = new authController();
