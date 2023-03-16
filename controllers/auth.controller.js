@@ -8,7 +8,7 @@ const generateAccesToken = (id, role) => {
     id,
     role,
   };
-  return jwt.sign(payload, secret, { expiresIn: "7d" });  
+  return jwt.sign(payload, secret, { expiresIn: "7d" });
 };
 
 class authController {
@@ -22,10 +22,10 @@ class authController {
       const hashPassword = bcrypt.hashSync(password, 7);
       const user = new Auth({
         username,
-        password: hashPassword,  
+        password: hashPassword,
       });
       if (!username) {
-        return res.status(400).json({ message: "Имя пользователя не может быть пустым" });  
+        return res.status(400).json({ message: "Имя пользователя не может быть пустым" });
       }
       if (password.length >= 12 || password.length < 4) {
         return res.status(400).json({
@@ -33,7 +33,8 @@ class authController {
         });
       }
       await user.save();
-      return res.json({ message: "пользователь успешно зарегистрирован" });  
+      const token = generateAccesToken(user._id, user.role);
+      return res.json({ token });
     } catch (error) {
       console.log(error.message);
       res.status(400).json({ message: "registration error" });
