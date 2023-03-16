@@ -3,10 +3,11 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { secret } = require("../config");
 
-const generateAccesToken = (id, role) => {
+const generateAccesToken = (id, role, username) => {
   const payload = {
     id,
     role,
+    username,
   };
   return jwt.sign(payload, secret, { expiresIn: "7d" });
 };
@@ -33,7 +34,7 @@ class authController {
         });
       }
       await user.save();
-      const token = generateAccesToken(user._id, user.role);
+      const token = generateAccesToken(user._id, user.role, user.username);
       return res.json({ token });
     } catch (error) {
       console.log(error.message);
@@ -51,7 +52,7 @@ class authController {
       if (!validPassword) {
         return res.status(400).json({ message: "Введен неверный пароль" });
       }
-      const token = generateAccesToken(user._id, user.role);
+      const token = generateAccesToken(user._id, user.role, user.username);
       return res.json({ token });
     } catch (error) {
       return res.status(400).json({ message: "Login error" });
@@ -66,10 +67,10 @@ class authController {
   async deleteUser(req, res) {
     try {
       const username = req.params;
-      const user = await Auth.findOneAndDelete({"username": username.user})
-      res.json(user)
+      const user = await Auth.findOneAndDelete({ username: username.user });
+      res.json(user);
     } catch (error) {
-      res.json({ message: 'Не удалось удалить' })
+      res.json({ message: "Не удалось удалить" });
     }
   }
 }
