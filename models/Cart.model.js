@@ -1,29 +1,29 @@
 const mongoose = require("mongoose");
 
 const CartSchema = new mongoose.Schema({
-  Name: {
+  name: {
     type: String,
     required: true,
   },
-  ItemImage: {
+  size: {
     type: String,
     default: "",
   },
-  ItemCount: {
+  count: {
     type: Number,
     default: 0,
   },
-  ItemPrice: {
+  price: {
     type: Number,
     default: 0,
   },
-  Total: {
+  total: {
     type: Number,
     default: 0,
   },
-  Discount: {
-    type: Number,
-    default: 0,
+  color: {
+    type: String,
+    default: "",
   },
 });
 

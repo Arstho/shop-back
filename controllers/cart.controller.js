@@ -3,14 +3,14 @@ const Cart = require("../models/Cart.model.js");
 module.exports.CartController = {
   createCartItem: async (req, res) => {
     try {
-      const { Name, ItemImage, ItemCount, ItemPrice, Total, Discount } = req.body;
+      const { name, size, count, price, total, color } = req.body;
       const newCartItem = new Cart({
-        Name,
-        ItemImage,
-        ItemCount,
-        ItemPrice,
-        Total,
-        Discount,
+        name,
+        size,
+        count,
+        price,
+        total,
+        color,
       });
       await newCartItem.save();
       res.json(newCartItem);
@@ -23,6 +23,15 @@ module.exports.CartController = {
     try {
       const cart = await Cart.findById(req.params.id);
       return res.json(cart);
+    } catch (err) {
+      return res.json(err);
+    }
+  },
+
+  getAllCarts: async (req, res) => {
+    try {
+      const allCarts = await Cart.find();
+      return res.json(allCarts);
     } catch (err) {
       return res.json(err);
     }
